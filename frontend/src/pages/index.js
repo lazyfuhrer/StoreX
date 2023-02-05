@@ -59,6 +59,8 @@ export default function Home() {
       <Heading>StoreX - the next gen storage system</Heading>
       <Text>StoreX is a decentralized storage system that allows you to store your files on the blockchain using IPFS.</Text>
       <Text>Account: {account ? account : "Not connected"}</Text>
+      <FileUpload account={account} provider={provider} contract={contract} />
+      <Display contract={contract} account={account} />
     </>
   )
 }
