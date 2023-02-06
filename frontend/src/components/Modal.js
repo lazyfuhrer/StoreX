@@ -3,9 +3,30 @@ import { useEffect } from 'react'
 
 function Modal({setModalOpen, contract}) {
 
-  const shareing = async () => {
-    
-  }
+  const sharing = async () => {
+    const address = document.querySelector('.address').value;
+    await contract.allow(address);
+    console.log('shared');
+    setModalOpen(false);
+    //setModalOpen(false);
+  };
+
+  useEffect(() => {
+    const accessList = async () => {
+      const addressList = await contract.shareAccess();
+      let select = document.querySelector("#selectNumber");
+      const options = addressList;
+
+      for (let i = 0; i < options.length; i++) {
+        let opt = options[i];
+        let e1 = document.createElement("option");
+        e1.textContent = opt;
+        e1.value = opt;
+        select.appendChild(e1);
+      }
+    };
+    contract && accessList();
+  }, [contract]);
 
   return (
     <>
@@ -22,7 +43,7 @@ function Modal({setModalOpen, contract}) {
           </FormControl>
           <Box className='footer'>
             <Button id='cancelBtn' onClick={ ()=>{setModalOpen(false)} }>Cancel</Button>
-            <Button id='cancelBtn' onClick={ ()=>shareing }>Share</Button>
+            <Button id='cancelBtn' onClick={ ()=>sharing() }>Share</Button>
           </Box>
         </Box>
       </Box>

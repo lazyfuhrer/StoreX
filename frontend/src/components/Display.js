@@ -6,18 +6,21 @@ import { Link } from '@chakra-ui/react'
 function Display({contract, account}) {
 
   const [data, setData] = useState("");
-  const getData = async () => {
+  const getdata = async () => {
     let dataArray;
-    const Otheraddress = document.querySelector('.address').value;
-    if (Otheraddress) {
-      dataArray = await contract.display(Otheraddress);
-      console.log(dataArray);
+    const Otheraddress = document.querySelector(".address").value;
+    try {
+      if (Otheraddress) {
+        dataArray = await contract.display(Otheraddress);
+        console.log(dataArray);
+      } else {
+        dataArray = await contract.display(account);
+      }
+    } catch (e) {
+      alert("You don't have access");
     }
-    else {
-      dataArray = await contract.display(account);
-    }
-
     const isEmpty = Object.keys(dataArray).length === 0;
+    //console.log("nulla", dataArray);
     if (!isEmpty) {
       const str = dataArray.toString();
       const str_array = str.split(',');
@@ -41,7 +44,7 @@ function Display({contract, account}) {
     <>
       <Box className='image-list'>{data}</Box>
       <Input type={'text'} placeholder="Enter wallet address" className='address'/>
-      <Button onClick={getData}>Get Data</Button>
+      <Button onClick={getdata}>Get Data</Button>
     </>
   )
 }
