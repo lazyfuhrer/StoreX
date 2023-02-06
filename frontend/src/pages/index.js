@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 //import styles from '@/styles/Home.module.css'
-import { Heading, Text } from '@chakra-ui/react'
+import { Button, Heading, Text } from '@chakra-ui/react'
 import Store from "../artifacts/contracts/Store.sol/Store.json";
 import { useState, useEffect } from 'react';
 import { ethers}  from 'ethers';
@@ -56,6 +56,8 @@ export default function Home() {
       {/* <FileUpload/>
       <Modal/>
       <Display/> */}
+      {!modalOpen && <Button onClick={ ()=>{setModalOpen(true)} }>Share</Button>}
+      {modalOpen && (<Modal setModalOpen={setModalOpen} contract={contract} />)}
       <Heading>StoreX - the next gen storage system</Heading>
       <Text>StoreX is a decentralized storage system that allows you to store your files on the blockchain using IPFS.</Text>
       <Text>Account: {account ? account : "Not connected"}</Text>
