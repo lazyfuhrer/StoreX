@@ -41,7 +41,7 @@ function FileUpload({account, provider, contract}) {
 
   const retrieveFile = async (e) => {
     const data = e.target.files[0];
-    console.log(data);
+    //console.log(data);
     const reader = new  window.FileReader();
     reader.readAsArrayBuffer(data);
     reader.onloadend = () => {
