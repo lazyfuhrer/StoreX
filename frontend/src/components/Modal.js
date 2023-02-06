@@ -8,7 +8,6 @@ function Modal({setModalOpen, contract}) {
     await contract.allow(address);
     console.log('shared');
     setModalOpen(false);
-    //setModalOpen(false);
   };
 
   useEffect(() => {
